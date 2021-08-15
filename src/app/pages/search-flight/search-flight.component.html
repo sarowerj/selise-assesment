@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="p-5">
+        <h1>Find cheapest flights for your destination</h1>
+        <div class="searchFlight">
+            <form [formGroup]="searchForm" autocomplete="off" (ngSubmit)="searchFlight()">
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field class="w-100">
+                            <mat-label>Departure Airport Code</mat-label>
+                            <input type="text" matInput formControlName="departureAirportCode" placeholder="Departure Airport Code">
+                            <mat-hint>A three characters alphanumarical string.</mat-hint>
+                            <mat-error *ngIf="departureAirportCode.hasError('required')">
+                                Please type departure airport code
+                            </mat-error>
+                            <mat-error *ngIf="departureAirportCode.hasError('minlength')">
+                                Departure airport code must be 3 characters alphanumaric. 
+                            </mat-error>
+                            <mat-error *ngIf="departureAirportCode.hasError('maxlength')">
+                                Departure airport code must be 3 characters alphanumaric. 
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-3">
+                        <mat-form-field class="w-100">
+                            <mat-label>Arival Airport Code</mat-label>
+                            <input type="text" matInput formControlName="arivalAirportCode" placeholder="arival Airport Code">
+                            <mat-hint>A three characters alphanumarical string.</mat-hint>
+                            <mat-error *ngIf="arivalAirportCode.hasError('required')">
+                                Please type arival airport code
+                            </mat-error>
+                            <mat-error *ngIf="arivalAirportCode.hasError('minlength')">
+                                Arival airport code must be 3 characters alphanumaric. 
+                            </mat-error>
+                            <mat-error *ngIf="arivalAirportCode.hasError('maxlength')">
+                                Arival airport code must be 3 characters alphanumaric. 
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-2">
+                        <mat-form-field  class="w-100">
+                            <mat-label>Departure date</mat-label>
+                            <input matInput  [matDatepicker]="picker" (dateChange)="changeDepartureDate($event)" [min]="defaultDepartureDate" formControlName="departureDate" placeholder="Departure date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                            <mat-hint>Please select departure date.</mat-hint>
+                            <mat-error *ngIf="departureDate.hasError('required')">
+                                Please type departure date
+                            </mat-error>
+                          </mat-form-field>
+                    </div>
+
+                    <div class="col-2">
+                        <mat-form-field class="w-100">
+                            <mat-label>Return date</mat-label>
+                            <input matInput [matDatepicker]="picker2" [min]="defaultReturnDate" formControlName="returnDate" placeholder="Return date">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                            <mat-hint>Please select return date.</mat-hint>
+                            <mat-error *ngIf="returnDate.hasError('required')">
+                                Please select return date
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-2">
+                        <button type="submit" class="w-100" mat-raised-button color="primary" [disabled]="searching">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="searching" *ngIf="searching">
+            <app-loader></app-loader>
+        </div>
+        <div class="availableFlights py-5" *ngIf="airlinesInfo">
+            <app-search-result [airlinesInfo]="airlinesInfo"></app-search-result> 
+        </div>
+    </div>
+</div>

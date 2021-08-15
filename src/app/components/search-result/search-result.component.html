@@ -1,0 +1,32 @@
+<div class="card item mb-3 w-100" *ngFor="let item of airlinesInfo">
+    <div class="row">
+        <div class="col-1">
+            <div class="content pt-4-5 pb-3">
+                <img [src]="item.AirlineLogoAddress" class="card-img-top" [alt]="item.AirlineName">
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="content pt-4-5 pb-3">
+                <div>Inbound Flight Duration : {{item.InboundFlightsDuration}} </div>
+                <small class="airlineName">{{item.AirlineName}}</small>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="content pt-4-5 pb-3">
+                <div>Outbound Flight Duration : {{item.OutboundFlightsDuration}} </div>
+                <small class="airlineName">{{item.AirlineName}}</small>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="content pt-4-5 pb-3 text-center">
+                {{item.Stops}} Stop
+            </div>
+        </div>
+        <div class="col-2 text-end">
+            <div class="content p-3">
+                <div class="price mb-3">${{item.TotalAmount}}</div>
+                <button mat-flat-button color="primary" class="w-100">View Deal</button>
+            </div>
+        </div>
+    </div>
+</div>
